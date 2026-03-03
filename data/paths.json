@@ -1,0 +1,38 @@
+[
+  {
+    "id": "web3-fundamentals",
+    "title": "Web3 Fundamentals",
+    "description": "Start from zero and build a solid understanding of how blockchain and Web3 work.",
+    "icon": "🌐",
+    "resourceIds": [
+      "ethereum-org",
+      "defi-llama",
+      "dao-handbook",
+      "web3-university"
+    ]
+  },
+  {
+    "id": "solidity-101",
+    "title": "Solidity 101",
+    "description": "Go from writing your first smart contract to testing and deploying it like a pro.",
+    "icon": "📘",
+    "resourceIds": [
+      "cryptozombies",
+      "solidity-docs",
+      "hardhat-docs",
+      "foundry-book"
+    ]
+  },
+  {
+    "id": "defi-deep-dive",
+    "title": "DeFi Deep Dive",
+    "description": "Understand the DeFi ecosystem from AMMs and lending protocols to advanced governance.",
+    "icon": "💰",
+    "resourceIds": [
+      "uniswap-docs",
+      "aave-docs",
+      "compound-governance",
+      "defi-llama"
+    ]
+  }
+]

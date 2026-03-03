@@ -5,6 +5,7 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import resources from '@/data/resources.json'
 import type { Resource, Category, Difficulty } from '@/lib/types'
 import Card from './Card'
+import SkeletonCard from './SkeletonCard'
 
 
 const CATEGORIES: Category[] = ['DeFi', 'NFTs', 'Gaming', 'Infra', 'DAO', 'DevTools']
@@ -70,6 +71,7 @@ export default function ExploreClient() {
   const [difficulty, setDifficulty] = useState(searchParams.get('difficulty') ?? '')
   const [sort, setSort] = useState(searchParams.get('sort') ?? 'featured')
   const [debouncedSearch, setDebouncedSearch] = useState(search)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Debounce 
   useEffect(() => {
@@ -80,6 +82,13 @@ export default function ExploreClient() {
     // if the user types again before 300ms, cancel the previous timer
     return () => clearTimeout(timer)
   }, [search])
+
+  //set skeletons for loading
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 800)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   // Sync filters to URL whenever they change
   const updateURL = useCallback(
@@ -135,11 +144,10 @@ export default function ExploreClient() {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setCategory('')}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
-                category === ''
+              className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${category === ''
                   ? 'bg-indigo-600 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
-              }`}
+                }`}
             >
               All
             </button>
@@ -147,11 +155,10 @@ export default function ExploreClient() {
               <button
                 key={cat}
                 onClick={() => setCategory(category === cat ? '' : cat)}
-                className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
-                  category === cat
+                className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${category === cat
                     ? 'bg-indigo-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -188,7 +195,13 @@ export default function ExploreClient() {
       </div>
 
       {/* Results Grid */}
-      {filtered.length > 0 ? (
+      {isLoading ? (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      ) : filtered.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((resource) => (
             <Card key={resource.id} {...resource} />
