@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const resource = resources.find((r) => r.id === id)
   if (!resource) return { title: 'Not Found' }
   return {
-    title: `${resource.title} | Web3Dir`,
+    title: `${resource.title}`,
     description: resource.description,
   }
 }

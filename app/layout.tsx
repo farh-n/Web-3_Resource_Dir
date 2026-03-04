@@ -17,8 +17,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Web-3 Resource Directory",
+
+  metadataBase: new URL("https://web3dir.vercel.app/"),
+
+  title: {
+    template:'%s | Web3Dir',
+    default:"Web-3 Resource Directory"
+  },
   description: "A Directory of Web-3 Learning Resources",
+
+  openGraph:{
+    title:'Web3Dir - Your Web3 Learning Hub',
+    description:'Discover curated Web3 resources for DeFi,NFTs,DAO,Gaming and more. ',
+    url:"https://web-3resourcedirv.vercel.app/",
+    siteName:'Web3Dir',
+    locale:'en_US',
+    type:"website"
+  },
+
+  twitter:{
+    card:'summary_large_image',
+    title:'Web3Dir - Your Web3 Learning Hub',
+    description:'Discover curated Web3 resources for DeFi,NFTs,DAO,Gaming and more. ',
+  },
+
+  robots:{
+    index:true,
+    follow:true,
+  },
 };
 
 export default function RootLayout({

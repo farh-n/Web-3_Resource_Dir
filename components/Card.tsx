@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Badge from './Badge'
-
+import {motion} from 'framer-motion'
 type CardProps = {
   id: string
   title: string
@@ -21,7 +21,10 @@ export default function Card({
   url,
 }: CardProps) {
   return (
-    <div className="group flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
+    <motion.div 
+      whileHover={{y:-4,boxShadow: '0 10px 30px rgba(0,0,0,0.1)'}}
+      transition={{duration:0.2,ease:'easeOut'}}
+      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
     
       <div className="mb-3 flex items-center gap-3">
         {icon && <span className="text-2xl">{icon}</span>}
@@ -58,6 +61,6 @@ export default function Card({
           Visit 
         </a>
       </div>
-    </div>
+    </motion.div>
   )
 }
