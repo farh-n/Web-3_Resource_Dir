@@ -1,11 +1,14 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import resources from '@/data/resources.json'
 import type { Resource, Category, Difficulty } from '@/lib/types'
-import Card from './Card'
 import SkeletonCard from './SkeletonCard'
+const Card=dynamic(()=> import ('./Card'),{
+  loading: () => <SkeletonCard />
+})
 
 
 const CATEGORIES: Category[] = ['DeFi', 'NFTs', 'Gaming', 'Infra', 'DAO', 'DevTools']

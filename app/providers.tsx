@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "next-themes"
 import React from "react"
+import { LazyMotion, domAnimation} from "framer-motion"
 
 export function Providers({children}:{children:React.ReactNode}){
     return(
@@ -11,7 +12,10 @@ export function Providers({children}:{children:React.ReactNode}){
             enableSystem
             disableTransitionOnChange
         >
-            {children}
+            <LazyMotion features={domAnimation} strict>
+                {children}
+            </LazyMotion>
+            
         </ThemeProvider>
     )
 }
